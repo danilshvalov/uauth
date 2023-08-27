@@ -9,20 +9,24 @@
 
 namespace yauth {
 
-YauthClient::YauthClient(const userver::components::ComponentConfig& config,
-                         const userver::components::ComponentContext& context)
+YauthClient::YauthClient(
+    const userver::components::ComponentConfig& config,
+    const userver::components::ComponentContext& context
+)
     : LoggableComponentBase(config, context) {
   ClientConfig client_config;
-  client_config.timeout = userver::utils::StringToDuration(
-      config["http-timeout"].As<std::string>());
+  client_config.timeout =
+      userver::utils::StringToDuration(config["http-timeout"].As<std::string>()
+      );
   client_config.retries = config["http-retries"].As<int>();
   auto stage_filepath =
       config["configs-stage-filepath"].As<std::optional<std::string>>();
-  client_config.yauth_url = config["meteum-url"].As<std::string>();
+  client_config.yauth_url = config["yauth-url"].As<std::string>();
 
   client_ = std::make_unique<Client>(
       context.FindComponent<userver::components::HttpClient>().GetHttpClient(),
-      client_config);
+      client_config
+  );
 }
 
 Client& YauthClient::GetClient() const { return *client_; }
@@ -30,12 +34,12 @@ Client& YauthClient::GetClient() const { return *client_; }
 userver::yaml_config::Schema YauthClient::GetStaticConfigSchema() {
   return userver::yaml_config::MergeSchemas<LoggableComponentBase>(R"(
 type: object
-description: Component that starts a meteum client.
+description: Component that starts a yandex auth client.
 additionalProperties: false
 properties:
     yauth-url:
         type: string
-        description: HTTP URL to request meteum data
+        description: HTTP URL to request yandex auth data
     http-timeout:
         type: string
         description: HTTP request timeout to the remote in utils::StringToDuration() suitable format
