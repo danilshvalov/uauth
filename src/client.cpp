@@ -23,6 +23,7 @@ Client::Client(
 
 UserInfo Client::FetchUserInfo(const AccessToken& token) const {
   auto response = SendRequest(token);
+  response->raise_for_status();
   return json::FromString(response->body()).As<UserInfo>();
 }
 
