@@ -1,6 +1,6 @@
 #pragma once
 
-#include <yauth/models/access_token.hpp>
+#include <userver/server/auth/user_auth_info.hpp>
 #include <yauth/models/user_info.hpp>
 
 #include <chrono>
@@ -22,14 +22,18 @@ struct ClientConfig {
 
 class Client final {
  public:
-  Client(userver::clients::http::Client& http_client,
-         const ClientConfig& config);
+  Client(
+      userver::clients::http::Client& http_client, const ClientConfig& config
+  );
 
-  UserInfo FetchUserInfo(const AccessToken& token) const;
+  UserInfo FetchUserInfo(
+      const userver::server::auth::UserAuthInfo::Ticket& token
+  ) const;
 
  private:
   std::shared_ptr<userver::clients::http::Response> SendRequest(
-      const AccessToken& token) const;
+      const userver::server::auth::UserAuthInfo::Ticket& token
+  ) const;
 
   userver::clients::http::Client& http_client_;
   const ClientConfig config_;

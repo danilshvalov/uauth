@@ -21,14 +21,16 @@ Client::Client(
 )
     : http_client_(http_client), config_(config) {}
 
-UserInfo Client::FetchUserInfo(const AccessToken& token) const {
+UserInfo Client::FetchUserInfo(
+    const userver::server::auth::UserAuthInfo::Ticket& token
+) const {
   auto response = SendRequest(token);
   response->raise_for_status();
   return json::FromString(response->body()).As<UserInfo>();
 }
 
 std::shared_ptr<userver::clients::http::Response> Client::SendRequest(
-    const AccessToken& token
+    const userver::server::auth::UserAuthInfo::Ticket& token
 ) const {
   http::headers::HeaderMap headers = {
       {"Authorization", fmt::format("OAuth {}", token.GetUnderlying())},
