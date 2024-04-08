@@ -1,7 +1,7 @@
 #pragma once
 
 #include <userver/server/auth/user_auth_info.hpp>
-#include <yauth/models/user_info.hpp>
+#include <ya_auth/models/user_info.hpp>
 
 #include <chrono>
 #include <memory>
@@ -12,10 +12,10 @@ class Client;
 class Response;
 }  // namespace userver::clients::http
 
-namespace yauth {
+namespace ya_auth {
 
 struct ClientConfig {
-  std::string yauth_url;
+  std::string ya_auth_url;
   std::chrono::milliseconds timeout{0};
   int retries{1};
 };
@@ -39,4 +39,4 @@ class Client final {
   const ClientConfig config_;
 };
 
-}  // namespace yauth
+}  // namespace ya_auth

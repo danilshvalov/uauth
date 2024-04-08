@@ -1,4 +1,4 @@
-#include <yauth/client.hpp>
+#include <ya_auth/client.hpp>
 
 #include <fmt/format.h>
 #include <userver/clients/http/client.hpp>
@@ -7,7 +7,7 @@
 #include <userver/http/url.hpp>
 #include <userver/storages/secdist/secdist.hpp>
 
-namespace yauth {
+namespace ya_auth {
 
 namespace {
 
@@ -37,11 +37,11 @@ std::shared_ptr<userver::clients::http::Response> Client::SendRequest(
   };
 
   return http_client_.CreateRequest()
-      .get(fmt::format("{}/{}", config_.yauth_url, "info"))
+      .get(fmt::format("{}/{}", config_.ya_auth_url, "info"))
       .headers(headers)
       .retry(config_.retries)
       .timeout(config_.timeout)
       .perform();
 }
 
-}  // namespace yauth
+}  // namespace ya_auth

@@ -9,7 +9,7 @@
 
 #include <userver/formats/json_fwd.hpp>
 
-namespace yauth {
+namespace ya_auth {
 
 struct UserEmail {
   std::string default_email;
@@ -74,4 +74,4 @@ struct UserInfo {
 UserInfo Parse(const userver::formats::json::Value& value,
                userver::formats::parse::To<UserInfo>);
 
-}  // namespace yauth
+}  // namespace ya_auth

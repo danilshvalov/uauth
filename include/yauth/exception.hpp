@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace yauth {
+namespace ya_auth {
 
 class Exception : public std::exception {
  public:
@@ -25,4 +25,4 @@ class InvalidArgumentException : public Exception {
   using Exception::Exception;
 };
 
-}  // namespace yauth
+}  // namespace ya_auth

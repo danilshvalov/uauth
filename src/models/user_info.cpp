@@ -1,10 +1,10 @@
-#include <yauth/models/user_info.hpp>
+#include <ya_auth/models/user_info.hpp>
 
 #include <userver/formats/json/value.hpp>
 #include <userver/formats/parse/common_containers.hpp>
 #include <userver/utils/trivial_map.hpp>
 
-namespace yauth {
+namespace ya_auth {
 
 namespace {
 
@@ -88,4 +88,4 @@ UserInfo Parse(const userver::formats::json::Value& value,
   };
 }
 
-}  // namespace yauth
+}  // namespace ya_auth

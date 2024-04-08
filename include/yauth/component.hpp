@@ -1,16 +1,16 @@
 #pragma once
 
-#include <yauth/client.hpp>
+#include <ya_auth/client.hpp>
 
 #include <userver/components/loggable_component_base.hpp>
 
-namespace yauth {
+namespace ya_auth {
 
-class YauthClient : public userver::components::LoggableComponentBase {
+class YaAuthClient : public userver::components::LoggableComponentBase {
  public:
-  static constexpr std::string_view kName = "yauth-client";
+  static constexpr std::string_view kName = "ya-auth-client";
 
-  YauthClient(const userver::components::ComponentConfig&,
+  YaAuthClient(const userver::components::ComponentConfig&,
               const userver::components::ComponentContext&);
 
   [[nodiscard]] Client& GetClient() const;
@@ -21,4 +21,4 @@ class YauthClient : public userver::components::LoggableComponentBase {
   std::unique_ptr<Client> client_;
 };
 
-}  // namespace yauth
+}  // namespace ya_auth

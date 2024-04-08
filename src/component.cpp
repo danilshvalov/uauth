@@ -1,4 +1,4 @@
-#include <yauth/component.hpp>
+#include <ya_auth/component.hpp>
 
 #include <userver/clients/http/component.hpp>
 #include <userver/components/component_config.hpp>
@@ -7,9 +7,9 @@
 #include <userver/utils/string_to_duration.hpp>
 #include <userver/yaml_config/merge_schemas.hpp>
 
-namespace yauth {
+namespace ya_auth {
 
-YauthClient::YauthClient(
+YaAuthClient::YaAuthClient(
     const userver::components::ComponentConfig& config,
     const userver::components::ComponentContext& context
 )
@@ -21,7 +21,7 @@ YauthClient::YauthClient(
   client_config.retries = config["http-retries"].As<int>();
   auto stage_filepath =
       config["configs-stage-filepath"].As<std::optional<std::string>>();
-  client_config.yauth_url = config["yauth-url"].As<std::string>();
+  client_config.ya_auth_url = config["ya_auth-url"].As<std::string>();
 
   client_ = std::make_unique<Client>(
       context.FindComponent<userver::components::HttpClient>().GetHttpClient(),
@@ -29,15 +29,15 @@ YauthClient::YauthClient(
   );
 }
 
-Client& YauthClient::GetClient() const { return *client_; }
+Client& YaAuthClient::GetClient() const { return *client_; }
 
-userver::yaml_config::Schema YauthClient::GetStaticConfigSchema() {
+userver::yaml_config::Schema YaAuthClient::GetStaticConfigSchema() {
   return userver::yaml_config::MergeSchemas<LoggableComponentBase>(R"(
 type: object
 description: Component that starts a yandex auth client.
 additionalProperties: false
 properties:
-    yauth-url:
+    ya_auth-url:
         type: string
         description: HTTP URL to request yandex auth data
     http-timeout:
@@ -49,4 +49,4 @@ properties:
 )");
 }
 
-}  // namespace yauth
+}  // namespace ya_auth

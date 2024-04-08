@@ -1,4 +1,4 @@
-#include <yauth/models/user_info.hpp>
+#include <ya_auth/models/user_info.hpp>
 
 #include <userver/formats/json/value.hpp>
 #include <userver/utest/utest.hpp>
@@ -7,14 +7,14 @@ namespace json = userver::formats::json;
 
 struct UserInfoTestData {
   std::string json;
-  yauth::UserInfo expected;
+  ya_auth::UserInfo expected;
 };
 
 struct UserInfoJsonTest : testing::TestWithParam<UserInfoTestData> {};
 
 UTEST_P(UserInfoJsonTest, ParseTest) {
   const auto [document, expected] = GetParam();
-  const auto result = json::FromString(document).As<yauth::UserInfo>();
+  const auto result = json::FromString(document).As<ya_auth::UserInfo>();
 
   EXPECT_EQ(result.login, expected.login);
   EXPECT_EQ(result.id, expected.id);
@@ -58,33 +58,33 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
                 .psuid =
                     "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge",
                 .email =
-                    yauth::UserEmail{
+                    ya_auth::UserEmail{
                         .default_email = "test@yandex.ru",
                         .emails = {"test@yandex.ru", "other-test@yandex.ru"},
                     },
                 .avatar =
-                    yauth::UserAvatar{
+                    ya_auth::UserAvatar{
                         .id = "131652443",
                         .is_empty = false,
                     },
                 .birthday = "1987-03-12",
                 .names =
-                    yauth::UserNames{
+                    ya_auth::UserNames{
                         .first_name = "Иван",
                         .last_name = "Иванов",
                         .display_name = "ivan",
                         .real_name = "Иван Иванов",
                     },
-                .sex = yauth::UserSex::kMale,
+                .sex = ya_auth::UserSex::kMale,
                 .phone =
-                    yauth::UserPhone{
+                    ya_auth::UserPhone{
                         .id = 12345678,
                         .number = "+79037659418",
                     },
@@ -103,14 +103,14 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
                 .psuid =
                     "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge",
                 .phone =
-                    yauth::UserPhone{
+                    ya_auth::UserPhone{
                         .id = 12345678,
                         .number = "+79037659418",
                     },
@@ -131,20 +131,20 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
                 .psuid =
                     "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge",
                 .names =
-                    yauth::UserNames{
+                    ya_auth::UserNames{
                         .first_name = "Иван",
                         .last_name = "Иванов",
                         .display_name = "Ivan",
                         .real_name = "Иван Иванов",
                     },
-                .sex = yauth::UserSex::kMale,
+                .sex = ya_auth::UserSex::kMale,
             },
         },
         UserInfoTestData{
@@ -158,7 +158,7 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
@@ -179,14 +179,14 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
                 .psuid =
                     "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge",
                 .avatar =
-                    yauth::UserAvatar{
+                    ya_auth::UserAvatar{
                         .id = "131652443",
                         .is_empty = false,
                     },
@@ -207,14 +207,14 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
                 .psuid =
                     "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge",
                 .email =
-                    yauth::UserEmail{
+                    ya_auth::UserEmail{
                         .default_email = "test@yandex.ru",
                         .emails = {"test@yandex.ru", "other-test@yandex.ru"},
                     },
@@ -229,7 +229,7 @@ INSTANTIATE_UTEST_SUITE_P(  //
                  "psuid": "1.AAceCw.tbHgw5DtJ9_zeqPrk-Ba2w.qPWSRC5v2t2IaksPJgnge"
               }
             )json",
-            yauth::UserInfo{
+            ya_auth::UserInfo{
                 .login = "ivan",
                 .id = "1000034426",
                 .client_id = "4760187d81bc4b7799476b42b5103713",
