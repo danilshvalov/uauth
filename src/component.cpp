@@ -21,7 +21,7 @@ YaAuthClient::YaAuthClient(
   client_config.retries = config["http-retries"].As<int>();
   auto stage_filepath =
       config["configs-stage-filepath"].As<std::optional<std::string>>();
-  client_config.ya_auth_url = config["ya_auth-url"].As<std::string>();
+  client_config.ya_auth_url = config["ya-auth-url"].As<std::string>();
 
   client_ = std::make_unique<Client>(
       context.FindComponent<userver::components::HttpClient>().GetHttpClient(),
@@ -37,7 +37,7 @@ type: object
 description: Component that starts a yandex auth client.
 additionalProperties: false
 properties:
-    ya_auth-url:
+    ya-auth-url:
         type: string
         description: HTTP URL to request yandex auth data
     http-timeout:
